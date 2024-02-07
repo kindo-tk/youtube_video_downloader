@@ -13,7 +13,7 @@ def download_video():
     
     try:
         yt = YouTube(url, on_progress_callback=on_progress)
-        stream = yt.streams.filter(res=resolution, file_extension="mp4").first()
+        stream = yt.streams.filter(res=resolution, progressive=True, file_extension="mp4").first()
         if not stream:
             raise ValueError(f"No stream found for resolution {resolution}.")
         
@@ -100,7 +100,6 @@ status_label.pack(pady=(10, 5))
 made_by_label = ctk.CTkLabel(content_frame, text="Made by TK", font=("Arial", 10))
 # pack the label at the bottom
 made_by_label.pack(side=ctk.BOTTOM, pady=(10, 0))
-
 
 # to start the app
 root.mainloop()
